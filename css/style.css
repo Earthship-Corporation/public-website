@@ -453,14 +453,7 @@ a:hover {
   }
 }
 
-.tagline {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.2em;
-  text-transform: lowercase;
-  font-style: italic;
-}
+
 
 /* --- Footer --- */
 .site-footer {
@@ -520,10 +513,6 @@ a:hover {
 
   .branding {
     margin-top: 1.5rem;
-  }
-
-  .tagline {
-    font-size: 0.75rem;
   }
 
   .footer-coord {

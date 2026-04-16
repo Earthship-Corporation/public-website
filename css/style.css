@@ -4,27 +4,27 @@
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Desert palette */
-  --bg-dark: #1a1714;
-  --bg-medium: #2a2520;
-  --bg-warm: #352f28;
-  --surface: #3d362e;
-  --border: #5a4f43;
-  --border-light: #7a6d5e;
+  /* Warm dusty-rose palette (halfway between desert dark & Poolsuite pink) */
+  --bg-dark: #d4b0a8;
+  --bg-medium: #c9a097;
+  --bg-warm: #be9690;
+  --surface: #b88d86;
+  --border: #a87c74;
+  --border-light: #c4a59e;
 
   /* Text */
-  --text-primary: #e8dcc8;
-  --text-secondary: #b0a48e;
-  --text-muted: #7a6d5e;
-  --text-accent: #d4a254;
+  --text-primary: #2e1f1a;
+  --text-secondary: #5a3d34;
+  --text-muted: #8c6e64;
+  --text-accent: #7a2e1a;
 
   /* Accents */
-  --rust: #c45d3e;
-  --rust-glow: #e06840;
-  --green-live: #4ade80;
-  --green-dim: #22543d;
-  --amber: #d4a254;
-  --amber-glow: #f0b860;
+  --rust: #b8432a;
+  --rust-glow: #d4503a;
+  --green-live: #2d8a4e;
+  --green-dim: #1a5c32;
+  --amber: #b07830;
+  --amber-glow: #c88a3a;
 
   /* Fonts */
   --font-mono: 'IBM Plex Mono', 'Courier Prime', 'Courier New', monospace;
@@ -55,8 +55,8 @@ body {
   overflow-x: hidden;
   /* Subtle noise texture via CSS */
   background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(196, 93, 62, 0.04) 0%, transparent 70%),
-    radial-gradient(ellipse at 80% 20%, rgba(212, 162, 84, 0.03) 0%, transparent 60%);
+    radial-gradient(ellipse at 20% 50%, rgba(196, 93, 62, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse at 80% 20%, rgba(220, 160, 150, 0.08) 0%, transparent 60%);
 }
 
 a {
@@ -82,7 +82,7 @@ a:hover {
 .boot-screen {
   position: fixed;
   inset: 0;
-  background: #0a0908;
+  background: #1a1210;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +96,7 @@ a:hover {
 
 .boot-text {
   font-family: var(--font-mono);
-  color: var(--green-live);
+  color: #4ade80;
   font-size: 0.85rem;
   line-height: 1.8;
   text-align: left;
@@ -194,16 +194,16 @@ a:hover {
   padding: calc(var(--status-bar-h) + 1.5rem) 1rem calc(var(--footer-h) + 1.5rem);
 }
 
-/* --- Broadcast Window --- */
+/* --- Broadcast Window (stays dark for contrast) --- */
 .broadcast-window {
   width: 100%;
   max-width: var(--window-max-w);
-  background: var(--bg-medium);
-  border: 1px solid var(--border);
+  background: #2a2420;
+  border: 1px solid #3d342c;
   border-radius: 6px;
   overflow: hidden;
   box-shadow:
-    0 2px 20px rgba(0, 0, 0, 0.4),
+    0 4px 30px rgba(0, 0, 0, 0.35),
     0 0 60px rgba(196, 93, 62, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
@@ -211,8 +211,8 @@ a:hover {
 /* Window title bar */
 .window-title-bar {
   height: 32px;
-  background: linear-gradient(180deg, var(--surface) 0%, var(--bg-warm) 100%);
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #3d362e 0%, #352f28 100%);
+  border-bottom: 1px solid #4a3f36;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -231,14 +231,14 @@ a:hover {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.window-btn.close { background: var(--rust); }
-.window-btn.minimize { background: var(--amber); }
-.window-btn.maximize { background: var(--green-live); }
+.window-btn.close { background: #c45d3e; }
+.window-btn.minimize { background: #d4a254; }
+.window-btn.maximize { background: #4ade80; }
 
 .window-title {
   font-size: 0.7rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: #b0a48e;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -258,7 +258,7 @@ a:hover {
 
 .signal-bars .bar {
   width: 3px;
-  background: var(--green-live);
+  background: #4ade80;
   border-radius: 1px;
 }
 
@@ -272,7 +272,7 @@ a:hover {
   position: relative;
   width: 100%;
   padding-top: 56.25%; /* 16:9 */
-  background: #0a0908;
+  background: #0d0b0a;
   overflow: hidden;
 }
 
@@ -331,7 +331,7 @@ a:hover {
 /* --- Info Strip (below video) --- */
 .info-strip {
   height: 28px;
-  background: var(--bg-dark);
+  background: #1a1714;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   display: flex;
   align-items: center;
@@ -349,50 +349,97 @@ a:hover {
 }
 
 .rec-indicator {
-  color: var(--rust);
+  color: #c45d3e;
   font-weight: 700;
   animation: blink 1.2s step-end infinite;
 }
 
 .feed-label {
-  color: var(--text-muted);
+  color: #7a6d5e;
 }
 
 .date-display {
-  color: var(--text-muted);
+  color: #7a6d5e;
   font-variant-numeric: tabular-nums;
 }
 
-/* --- Branding --- */
+/* --- Branding: Neon Sign --- */
 .branding {
   text-align: center;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.proto-title {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+/* Sign board — mimics the real Proto-Town campus sign */
+.neon-sign-board {
+  position: relative;
+  border-radius: 3px;
+  background: #1c1b2e;
+  border: 3px solid #5a4e3a;
+  box-shadow:
+    0 6px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(90, 78, 58, 0.4),
+    0 0 60px rgba(255, 107, 53, 0.08);
 }
 
-.title-proto {
-  display: block;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  color: var(--text-primary);
-  text-shadow: 0 0 30px rgba(212, 162, 84, 0.15);
+/* Inner decorative frame */
+.neon-sign-inner {
+  position: relative;
+  margin: 6px;
+  border-radius: 3px;
+  border: 1.5px solid #35285a;
+  padding: 0.6rem 1.8rem;
 }
 
-.title-town {
-  display: block;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  color: var(--text-accent);
-  text-shadow: 0 0 30px rgba(212, 162, 84, 0.2);
+/* Corner accents */
+.corner-accent {
+  position: absolute;
+  font-size: 9px;
+  line-height: 1;
+  color: #5a4e3a;
+  user-select: none;
+}
+
+.corner-accent.tl { top: 4px; left: 8px; }
+.corner-accent.tr { top: 4px; right: 8px; }
+.corner-accent.bl { bottom: 4px; left: 8px; }
+.corner-accent.br { bottom: 4px; right: 8px; }
+
+/* Neon text */
+.neon-proto-town {
+  font-family: 'Alfa Slab One', Georgia, serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  user-select: none;
+  animation: protoTownPulse 5s ease-in-out infinite;
+}
+
+/* Neon glow pulse animation */
+@keyframes protoTownPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.55),
+      0 0 18px #FF6B35,
+      0 0 36px #FF4500,
+      0 0 65px rgba(255, 50, 0, 0.6);
+  }
+  50% {
+    text-shadow:
+      0 0 5px rgba(255, 255, 255, 0.3),
+      0 0 12px #FF6B35,
+      0 0 24px #FF4500,
+      0 0 42px rgba(255, 50, 0, 0.35);
+  }
 }
 
 .tagline {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   font-size: 0.85rem;
   color: var(--text-secondary);
   letter-spacing: 0.2em;
@@ -496,5 +543,5 @@ a:hover {
 /* --- Selection --- */
 ::selection {
   background: var(--rust);
-  color: var(--text-primary);
+  color: #fff;
 }

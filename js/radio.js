@@ -37,7 +37,7 @@
     source.connect(analyser);
     analyser.connect(audioCtx.destination);
 
-    audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.7;
+    audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.4;
 
     audio.addEventListener('playing', function () {
       if (statusText) statusText.textContent = 'KLKT 107.9 · LOCKHART, TX';

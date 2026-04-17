@@ -4,13 +4,13 @@
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Warm dusty-rose palette (halfway between desert dark & Poolsuite pink) */
-  --bg-dark: #d4b0a8;
-  --bg-medium: #c9a097;
-  --bg-warm: #be9690;
-  --surface: #b88d86;
-  --border: #a87c74;
-  --border-light: #c4a59e;
+  /* Warm desert tan palette */
+  --bg-dark: #d4c4a8;
+  --bg-medium: #c9b697;
+  --bg-warm: #beaa90;
+  --surface: #b8a286;
+  --border: #a89274;
+  --border-light: #c4b49e;
 
   /* Text */
   --text-primary: #2e1f1a;
@@ -76,52 +76,6 @@ a:hover {
 .separator {
   color: var(--text-muted);
   margin: 0 0.5rem;
-}
-
-/* --- Boot Screen --- */
-.boot-screen {
-  position: fixed;
-  inset: 0;
-  background: #1a1210;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: opacity 0.4s ease-out;
-}
-
-.boot-screen.fade-out {
-  opacity: 0;
-}
-
-.boot-text {
-  font-family: var(--font-mono);
-  color: #4ade80;
-  font-size: 0.85rem;
-  line-height: 1.8;
-  text-align: left;
-}
-
-.boot-text p {
-  opacity: 0;
-  animation: boot-line 0.3s ease forwards;
-}
-
-.boot-text p:nth-child(1) { animation-delay: 0.2s; }
-.boot-text p:nth-child(2) { animation-delay: 0.7s; }
-.boot-text p:nth-child(3) { animation-delay: 1.1s; }
-
-.boot-blink {
-  animation: blink 0.6s step-end infinite;
-}
-
-@keyframes boot-line {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
 }
 
 /* --- Status Bar (top) --- */
@@ -379,36 +333,34 @@ a:hover {
 }
 
 
-/* --- Radio Player Panel --- */
+/* --- Radio Player Panel (compact single bar) --- */
 .radio-panel {
   width: 100%;
   max-width: var(--window-max-w);
-  margin-top: 1rem;
-  background: #2a2420;
-  border: 1px solid #3d342c;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.35),
-    0 0 40px rgba(212, 162, 84, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  margin-top: 0.75rem;
 }
 
-/* Radio title bar */
-.radio-title-bar {
-  height: 28px;
-  background: linear-gradient(180deg, #3d362e 0%, #352f28 100%);
-  border-bottom: 1px solid #4a3f36;
+.radio-bar {
+  height: 36px;
+  background: #2a2420;
+  border: 1px solid #3d342c;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.75rem;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  padding: 0 0.6rem;
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
-.radio-title-left {
+.radio-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-bar-right {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -416,17 +368,15 @@ a:hover {
 
 .radio-icon {
   color: #d4a254;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .radio-title-text {
   color: #b0a48e;
+  font-size: 0.65rem;
   font-weight: 500;
-}
-
-.radio-title-right {
-  display: flex;
-  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .radio-status {
@@ -440,39 +390,12 @@ a:hover {
   color: #d4a254;
 }
 
-/* Visualizer display */
-.radio-display {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  background: #0d0f08;
-  border-top: 1px solid rgba(255, 255, 255, 0.02);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-.radio-display canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Controls strip */
-.radio-controls {
-  height: 40px;
-  background: #1e1a16;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.75rem;
-}
-
 /* Play button — retro beveled */
 .radio-play-btn {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 4px 12px;
+  gap: 0.3rem;
+  padding: 3px 10px;
   background: #3a3228;
   border-radius: 2px;
   border-top: 1.5px solid #5a5048;
@@ -481,7 +404,7 @@ a:hover {
   border-right: 1.5px solid #151210;
   cursor: pointer;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #b0a48e;
@@ -505,21 +428,15 @@ a:hover {
 }
 
 .radio-play-icon {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   line-height: 1;
 }
 
 .radio-play-label {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
 }
 
 /* Volume slider */
-.radio-volume-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .radio-volume-label {
   color: #7a6d5e;
   font-size: 0.6rem;
@@ -530,8 +447,8 @@ a:hover {
 .radio-volume {
   -webkit-appearance: none;
   appearance: none;
-  width: 80px;
-  height: 4px;
+  width: 70px;
+  height: 3px;
   background: #3a3228;
   border-radius: 2px;
   outline: none;
@@ -541,8 +458,8 @@ a:hover {
 .radio-volume::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 1px;
   background: #7a6d5e;
   border-top: 1px solid #9a8e7e;
@@ -553,8 +470,8 @@ a:hover {
 }
 
 .radio-volume::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 1px;
   background: #7a6d5e;
   border-top: 1px solid #9a8e7e;
@@ -621,23 +538,15 @@ a:hover {
   }
 
   .radio-panel {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
   }
 
-  .radio-display {
-    height: 70px;
+  .radio-bar {
+    height: 32px;
   }
 
-  .radio-title-bar {
-    height: 24px;
-    font-size: 0.55rem;
-  }
-
-  .radio-controls {
-    height: 36px;
-  }
-
-  .radio-status {
+  .radio-status,
+  .radio-title-text {
     display: none;
   }
 

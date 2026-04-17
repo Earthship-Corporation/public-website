@@ -5,21 +5,6 @@
 (function () {
   'use strict';
 
-  // --- Boot Sequence ---
-  const bootScreen = document.getElementById('boot-screen');
-  const site = document.getElementById('site');
-
-  function endBoot() {
-    bootScreen.classList.add('fade-out');
-    site.classList.remove('hidden');
-    setTimeout(function () {
-      bootScreen.style.display = 'none';
-    }, 500);
-  }
-
-  // Show boot screen for ~1.8s then reveal site
-  setTimeout(endBoot, 1800);
-
   // --- Clock ---
   const clockEl = document.getElementById('clock');
   const dateEl = document.getElementById('date-display');

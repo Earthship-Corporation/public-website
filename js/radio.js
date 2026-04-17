@@ -14,10 +14,11 @@
   var isPlaying = false;
   var isInitialized = false;
 
-  var MAX_RETRIES = 5;
-  var BASE_DELAY = 2000; // 2s, doubles each retry
+  var BASE_DELAY = 2; // seconds, doubles each retry
+  var MAX_DELAY = 120; // cap at 2 minutes
   var retryCount = 0;
   var retryTimer = null;
+  var countdownTimer = null;
 
   var playBtn = document.getElementById('radio-play-btn');
   var playIcon = document.getElementById('radio-play-icon');
@@ -63,29 +64,36 @@
   }
 
   function attemptRetry() {
-    if (retryCount >= MAX_RETRIES) {
-      if (statusText) statusText.textContent = 'OFF AIR';
-      isPlaying = false;
-      updatePlayButton();
-      return;
-    }
     retryCount++;
-    var delay = BASE_DELAY * Math.pow(2, retryCount - 1);
-    if (statusText) statusText.textContent = 'RECONNECTING...';
+    var delay = Math.min(BASE_DELAY * Math.pow(2, retryCount - 1), MAX_DELAY);
+    var remaining = delay;
+
+    if (statusText) statusText.textContent = 'RECONNECTING IN ' + remaining + 's';
+
+    countdownTimer = setInterval(function () {
+      remaining--;
+      if (remaining <= 0 || !isPlaying) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+        return;
+      }
+      if (statusText) statusText.textContent = 'RECONNECTING IN ' + remaining + 's';
+    }, 1000);
+
     retryTimer = setTimeout(function () {
+      if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
       if (!isPlaying) return; // user stopped during wait
+      if (statusText) statusText.textContent = 'TUNING IN...';
       audio.src = STREAM_URL;
       audio.play().catch(function () {
         attemptRetry();
       });
-    }, delay);
+    }, delay * 1000);
   }
 
   function cancelRetry() {
-    if (retryTimer) {
-      clearTimeout(retryTimer);
-      retryTimer = null;
-    }
+    if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+    if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
     retryCount = 0;
   }
 

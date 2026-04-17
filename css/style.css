@@ -455,6 +455,191 @@ a:hover {
 
 
 
+/* --- Radio Player Panel --- */
+.radio-panel {
+  width: 100%;
+  max-width: var(--window-max-w);
+  margin-top: 1rem;
+  background: #2a2420;
+  border: 1px solid #3d342c;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(212, 162, 84, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Radio title bar */
+.radio-title-bar {
+  height: 28px;
+  background: linear-gradient(180deg, #3d362e 0%, #352f28 100%);
+  border-bottom: 1px solid #4a3f36;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.radio-title-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-icon {
+  color: #d4a254;
+  font-size: 0.8rem;
+}
+
+.radio-title-text {
+  color: #b0a48e;
+  font-weight: 500;
+}
+
+.radio-title-right {
+  display: flex;
+  align-items: center;
+}
+
+.radio-status {
+  color: #7a6d5e;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  transition: color 0.3s;
+}
+
+.radio-panel.is-playing .radio-status {
+  color: #d4a254;
+}
+
+/* Visualizer display */
+.radio-display {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: #0d0f08;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.radio-display canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Controls strip */
+.radio-controls {
+  height: 40px;
+  background: #1e1a16;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+}
+
+/* Play button — retro beveled */
+.radio-play-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 4px 12px;
+  background: #3a3228;
+  border-radius: 2px;
+  border-top: 1.5px solid #5a5048;
+  border-left: 1.5px solid #5a5048;
+  border-bottom: 1.5px solid #151210;
+  border-right: 1.5px solid #151210;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b0a48e;
+  transition: color 0.2s;
+  outline: none;
+}
+
+.radio-play-btn:hover {
+  color: #d4a254;
+}
+
+.radio-play-btn:active {
+  border-top-color: #151210;
+  border-left-color: #151210;
+  border-bottom-color: #5a5048;
+  border-right-color: #5a5048;
+}
+
+.radio-panel.is-playing .radio-play-btn {
+  color: #d4a254;
+}
+
+.radio-play-icon {
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.radio-play-label {
+  font-size: 0.6rem;
+}
+
+/* Volume slider */
+.radio-volume-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-volume-label {
+  color: #7a6d5e;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.radio-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80px;
+  height: 4px;
+  background: #3a3228;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.radio-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 1px;
+  background: #7a6d5e;
+  border-top: 1px solid #9a8e7e;
+  border-left: 1px solid #9a8e7e;
+  border-bottom: 1px solid #2a2420;
+  border-right: 1px solid #2a2420;
+  cursor: pointer;
+}
+
+.radio-volume::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 1px;
+  background: #7a6d5e;
+  border-top: 1px solid #9a8e7e;
+  border-left: 1px solid #9a8e7e;
+  border-bottom: 1px solid #2a2420;
+  border-right: 1px solid #2a2420;
+  cursor: pointer;
+}
+
 /* --- Footer --- */
 .site-footer {
   position: fixed;
@@ -513,6 +698,27 @@ a:hover {
 
   .branding {
     margin-top: 1.5rem;
+  }
+
+  .radio-panel {
+    margin-top: 0.75rem;
+  }
+
+  .radio-display {
+    height: 70px;
+  }
+
+  .radio-title-bar {
+    height: 24px;
+    font-size: 0.55rem;
+  }
+
+  .radio-controls {
+    height: 36px;
+  }
+
+  .radio-status {
+    display: none;
   }
 
   .footer-coord {

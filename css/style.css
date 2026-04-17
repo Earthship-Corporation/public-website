@@ -378,82 +378,6 @@ a:hover {
   font-variant-numeric: tabular-nums;
 }
 
-/* --- Branding: Neon Sign --- */
-.branding {
-  text-align: center;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Sign board — mimics the real Proto-Town campus sign */
-.neon-sign-board {
-  position: relative;
-  border-radius: 3px;
-  background: #1c1b2e;
-  border: 3px solid #5a4e3a;
-  box-shadow:
-    0 6px 32px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(90, 78, 58, 0.4),
-    0 0 60px rgba(255, 107, 53, 0.08);
-}
-
-/* Inner decorative frame */
-.neon-sign-inner {
-  position: relative;
-  margin: 6px;
-  border-radius: 3px;
-  border: 1.5px solid #35285a;
-  padding: 0.6rem 1.8rem;
-}
-
-/* Corner accents */
-.corner-accent {
-  position: absolute;
-  font-size: 9px;
-  line-height: 1;
-  color: #5a4e3a;
-  user-select: none;
-}
-
-.corner-accent.tl { top: 4px; left: 8px; }
-.corner-accent.tr { top: 4px; right: 8px; }
-.corner-accent.bl { bottom: 4px; left: 8px; }
-.corner-accent.br { bottom: 4px; right: 8px; }
-
-/* Neon text */
-.neon-proto-town {
-  font-family: 'Alfa Slab One', Georgia, serif;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: clamp(1.6rem, 5vw, 2.6rem);
-  line-height: 1.15;
-  letter-spacing: 0.12em;
-  white-space: nowrap;
-  user-select: none;
-  animation: protoTownPulse 5s ease-in-out infinite;
-}
-
-/* Neon glow pulse animation */
-@keyframes protoTownPulse {
-  0%, 100% {
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.55),
-      0 0 18px #FF6B35,
-      0 0 36px #FF4500,
-      0 0 65px rgba(255, 50, 0, 0.6);
-  }
-  50% {
-    text-shadow:
-      0 0 5px rgba(255, 255, 255, 0.3),
-      0 0 12px #FF6B35,
-      0 0 24px #FF4500,
-      0 0 42px rgba(255, 50, 0, 0.35);
-  }
-}
-
-
 
 /* --- Radio Player Panel --- */
 .radio-panel {
@@ -694,10 +618,6 @@ a:hover {
 
   .window-title {
     font-size: 0.6rem;
-  }
-
-  .branding {
-    margin-top: 1.5rem;
   }
 
   .radio-panel {

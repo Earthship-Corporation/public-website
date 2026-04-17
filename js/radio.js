@@ -14,6 +14,11 @@
   var isPlaying = false;
   var isInitialized = false;
 
+  var MAX_RETRIES = 5;
+  var BASE_DELAY = 2000; // 2s, doubles each retry
+  var retryCount = 0;
+  var retryTimer = null;
+
   var playBtn = document.getElementById('radio-play-btn');
   var playIcon = document.getElementById('radio-play-icon');
   var volumeSlider = document.getElementById('radio-volume');
@@ -40,6 +45,7 @@
     audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.4;
 
     audio.addEventListener('playing', function () {
+      retryCount = 0; // reset on successful playback
       if (statusText) statusText.textContent = 'KLKT 107.9 · LOCKHART, TX';
     });
 
@@ -48,12 +54,39 @@
     });
 
     audio.addEventListener('error', function () {
-      if (statusText) statusText.textContent = 'OFF AIR';
-      isPlaying = false;
-      updatePlayButton();
+      if (isPlaying) {
+        attemptRetry();
+      }
     });
 
     isInitialized = true;
+  }
+
+  function attemptRetry() {
+    if (retryCount >= MAX_RETRIES) {
+      if (statusText) statusText.textContent = 'OFF AIR';
+      isPlaying = false;
+      updatePlayButton();
+      return;
+    }
+    retryCount++;
+    var delay = BASE_DELAY * Math.pow(2, retryCount - 1);
+    if (statusText) statusText.textContent = 'RECONNECTING...';
+    retryTimer = setTimeout(function () {
+      if (!isPlaying) return; // user stopped during wait
+      audio.src = STREAM_URL;
+      audio.play().catch(function () {
+        attemptRetry();
+      });
+    }, delay);
+  }
+
+  function cancelRetry() {
+    if (retryTimer) {
+      clearTimeout(retryTimer);
+      retryTimer = null;
+    }
+    retryCount = 0;
   }
 
   function updatePlayButton() {
@@ -75,15 +108,18 @@
     }
 
     if (isPlaying) {
+      cancelRetry();
       audio.pause();
       audio.removeAttribute('src');
       audio.load();
       isPlaying = false;
       if (statusText) statusText.textContent = 'KLKT 107.9 · STANDBY';
     } else {
+      cancelRetry();
       audio.src = STREAM_URL;
       audio.play().catch(function () {
-        if (statusText) statusText.textContent = 'STREAM ERROR';
+        isPlaying = true; // ensure retry loop can run
+        attemptRetry();
       });
       isPlaying = true;
       if (statusText) statusText.textContent = 'TUNING IN...';

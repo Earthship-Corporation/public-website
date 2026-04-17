@@ -300,11 +300,11 @@ a:hover {
   border: none;
 }
 
-/* CRT Overlay */
+/* CRT Overlay — also blocks hover on the iframe to suppress YouTube controls */
 .crt-overlay {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: auto;
   background: radial-gradient(
     ellipse at center,
     transparent 60%,

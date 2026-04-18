@@ -53,10 +53,12 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
-  /* Subtle noise texture via CSS */
-  background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(196, 93, 62, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse at 80% 20%, rgba(220, 160, 150, 0.08) 0%, transparent 60%);
+  /* Full-bleed background image */
+  background-image: url('../assets/images/joshua-3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {

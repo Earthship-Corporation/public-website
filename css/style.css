@@ -256,11 +256,12 @@ a:hover {
   border: none;
 }
 
-/* CRT Overlay — also blocks hover on the iframe to suppress YouTube controls */
+/* CRT Overlay — pointer-events: none lets clicks through to the iframe
+   (needed for mobile/Safari where autoplay isn't supported) */
 .crt-overlay {
   position: absolute;
   inset: 0;
-  pointer-events: auto;
+  pointer-events: none;
   background: radial-gradient(
     ellipse at center,
     transparent 60%,

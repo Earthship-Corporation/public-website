@@ -8,9 +8,6 @@
   var STREAM_URL = 'https://klkt.broadcasttool.stream/play';
 
   var audio = null;
-  var audioCtx = null;
-  var analyser = null;
-  var source = null;
   var isPlaying = false;
   var isInitialized = false;
 
@@ -30,18 +27,7 @@
     if (isInitialized) return;
 
     audio = new Audio();
-    audio.crossOrigin = 'anonymous';
     audio.preload = 'none';
-    audio.src = STREAM_URL;
-
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 128;
-    analyser.smoothingTimeConstant = 0.8;
-
-    source = audioCtx.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
 
     audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.4;
 
@@ -111,10 +97,6 @@
   function togglePlay() {
     if (!isInitialized) initAudio();
 
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
     if (isPlaying) {
       cancelRetry();
       audio.pause();
@@ -145,10 +127,4 @@
       if (audio) audio.volume = parseFloat(this.value);
     });
   }
-
-  // Expose analyser for the visualizer
-  window.protoRadio = {
-    getAnalyser: function () { return analyser; },
-    isPlaying: function () { return isPlaying; }
-  };
 })();

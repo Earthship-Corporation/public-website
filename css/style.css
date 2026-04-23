@@ -53,51 +53,12 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-/* --- Photo collage background ---
-   Random polaroid-style snapshots scattered behind the broadcast window.
-   Populated by js/collage.js on page load. */
-.photo-collage {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.photo-collage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(212, 196, 168, 0) 30%,
-    rgba(212, 196, 168, 0.35) 100%
-  );
-  pointer-events: none;
-}
-
-.photo-collage .poster {
-  position: absolute;
-  background: #f3ead8;
-  padding: 6px 6px 22px;
-  box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.2);
-  transform-origin: center center;
-  will-change: transform;
-}
-
-.photo-collage .poster img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.site {
-  position: relative;
-  z-index: 1;
+  /* Full-bleed background image */
+  background-image: url('../assets/images/joshua-3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a {

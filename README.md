@@ -9,7 +9,7 @@ The site presents a single-page "Desert Channel" — a live video feed from Prot
 ## Stack
 
 - **Pure HTML + CSS + vanilla JS** — no frameworks, no build step
-- **YouTube embed** (placeholder) → will be replaced with RTMP/HLS livestream via hls.js
+- **Cloudflare Stream** for live video embed
 - **GitHub Pages** for hosting
 
 ## Local Development
@@ -25,12 +25,10 @@ python3 -m http.server 8000
 
 The site is deployed via GitHub Pages from the `main` branch root.
 
-## Future: RTMP Livestream
+## Livestream
 
-The YouTube embed is a placeholder. The production setup will be:
+The live video feed is served via Cloudflare Stream. The RTMP ingest pipeline is:
 
 ```
-Camera/OBS → RTMP push → Ingest Service (Cloudflare Stream / Mux / MediaMTX) → HLS → hls.js player
+Camera/OBS → RTMP push → Cloudflare Stream → iframe embed
 ```
-
-When ready, replace the YouTube iframe with the hls.js player in `js/stream.js`.

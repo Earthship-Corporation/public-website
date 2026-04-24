@@ -542,7 +542,6 @@ a:hover {
 /* --- Thoughts Button & Modal --- */
 .thoughts-btn-hero {
   display: block;
-  width: 100%;
   max-width: var(--window-max-w);
   margin-bottom: 0.75rem;
   padding: 0.6rem 1.5rem;

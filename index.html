@@ -39,7 +39,6 @@
 
     <!-- Main content: the broadcast window -->
     <main class="broadcast-container">
-      <!-- <button id="thoughts-btn-hero" class="thoughts-btn-hero">Thoughts</button> -->
       <div class="broadcast-window">
         <!-- Window title bar -->
         <div class="window-title-bar">
@@ -104,27 +103,11 @@
 
     </main>
 
-    <!-- Thoughts Modal -->
-    <div id="thoughts-modal" class="thoughts-overlay hidden">
-      <div class="thoughts-window">
-        <div class="thoughts-title-bar">
-          <span class="thoughts-title">THOUGHTS</span>
-          <button id="thoughts-close" class="thoughts-close-btn" title="Close">&#x2715;</button>
-        </div>
-        <div class="thoughts-body">
-          <p>Over the last half-century, the American imagination has been held captive by a sanitized archetype of progress. The last remnants of frontier spirit were replaced by programmatic company formation and layers of regulations that strangled genuine innovation. Inventive pioneers solving new problems as they worked their way westward gave way to startups selling nonsensical software. Rather than push the realm of possibility, we filled in gaps between paths.</p>
-          <p>Today, America has successfully diagnosed reindustrialization as a priority. Our nation's body is healing as our factories return. But our soul of experimentation, newness and doing big things must be resurrected alongside.</p>
-          <p>Proto-Town's infrastructure allows for speed in building with the spirit of our ancestral frontier. Prophetic founders will not be cultivated in our culturally exhausted cities, but in new places.</p>
-        </div>
-      </div>
-    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-left">
         <a href="https://www.proto.town/" target="_blank" rel="noopener">proto.town</a>
-        <!-- <span class="separator">|</span>
-        <button id="thoughts-btn" class="thoughts-btn">Thoughts</button> -->
       </div>
       <div class="footer-right">
         <span class="footer-coord">32.4°N 97.8°W</span>
@@ -134,19 +117,5 @@
 
   <script src="js/effects.js"></script>
   <script src="js/radio.js"></script>
-  <script>
-    (function () {
-      var modal = document.getElementById('thoughts-modal');
-      function openModal() { modal.classList.remove('hidden'); }
-      document.getElementById('thoughts-btn').addEventListener('click', openModal);
-      document.getElementById('thoughts-btn-hero').addEventListener('click', openModal);
-      document.getElementById('thoughts-close').addEventListener('click', function () {
-        modal.classList.add('hidden');
-      });
-      modal.addEventListener('click', function (e) {
-        if (e.target === modal) modal.classList.add('hidden');
-      });
-    })();
-  </script>
 </body>
 </html>

@@ -39,6 +39,7 @@
 
     <!-- Main content: the broadcast window -->
     <main class="broadcast-container">
+      <button id="thoughts-btn-hero" class="thoughts-btn-hero">Thoughts</button>
       <div class="broadcast-window">
         <!-- Window title bar -->
         <div class="window-title-bar">
@@ -136,9 +137,9 @@
   <script>
     (function () {
       var modal = document.getElementById('thoughts-modal');
-      document.getElementById('thoughts-btn').addEventListener('click', function () {
-        modal.classList.remove('hidden');
-      });
+      function openModal() { modal.classList.remove('hidden'); }
+      document.getElementById('thoughts-btn').addEventListener('click', openModal);
+      document.getElementById('thoughts-btn-hero').addEventListener('click', openModal);
       document.getElementById('thoughts-close').addEventListener('click', function () {
         modal.classList.add('hidden');
       });

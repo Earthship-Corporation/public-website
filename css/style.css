@@ -540,6 +540,39 @@ a:hover {
 }
 
 /* --- Thoughts Button & Modal --- */
+.thoughts-btn-hero {
+  display: block;
+  width: 100%;
+  max-width: var(--window-max-w);
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  background: #2a2420;
+  border: 1px solid #3d342c;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #b0a48e;
+  cursor: pointer;
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.thoughts-btn-hero:hover {
+  color: #d4a254;
+  border-color: #5a4d40;
+}
+
+.thoughts-btn-hero:active {
+  box-shadow:
+    0 1px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 .thoughts-btn {
   background: none;
   border: none;

@@ -540,10 +540,17 @@ a:hover {
 }
 
 /* --- Thoughts Button & Modal --- */
-.thoughts-btn-hero {
-  display: block;
+.hero-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  width: 100%;
   max-width: var(--window-max-w);
   margin-bottom: 0.75rem;
+}
+
+.thoughts-btn-hero {
+  display: block;
   padding: 0.6rem 1.5rem;
   background: #2a2420;
   border: 1px solid #3d342c;
@@ -555,6 +562,8 @@ a:hover {
   letter-spacing: 0.12em;
   color: #b0a48e;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
   box-shadow:
     0 2px 12px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);

@@ -543,6 +543,7 @@ a:hover {
 .hero-buttons {
   display: flex;
   gap: 0.75rem;
+  justify-content: center;
   width: 100%;
   max-width: var(--window-max-w);
   margin-bottom: 0.75rem;
@@ -550,7 +551,6 @@ a:hover {
 
 .thoughts-btn-hero {
   display: block;
-  flex: 1;
   padding: 0.6rem 1.5rem;
   background: #2a2420;
   border: 1px solid #3d342c;

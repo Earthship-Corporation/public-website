@@ -539,6 +539,108 @@ a:hover {
   }
 }
 
+/* --- Thoughts Button & Modal --- */
+.thoughts-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-accent);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.thoughts-btn:hover {
+  color: var(--amber-glow);
+}
+
+.thoughts-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.thoughts-window {
+  width: 100%;
+  max-width: 600px;
+  background: #2a2420;
+  border: 1px solid #3d342c;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.thoughts-title-bar {
+  height: 32px;
+  background: linear-gradient(180deg, #3d362e 0%, #352f28 100%);
+  border-bottom: 1px solid #4a3f36;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+}
+
+.thoughts-title {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #b0a48e;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.thoughts-close-btn {
+  background: #4a4038;
+  border-top: 1.5px solid #6b6058;
+  border-left: 1.5px solid #6b6058;
+  border-bottom: 1.5px solid #1a1612;
+  border-right: 1.5px solid #1a1612;
+  width: 18px;
+  height: 18px;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  line-height: 1;
+  color: #9a8e7e;
+  cursor: pointer;
+}
+
+.thoughts-close-btn:active {
+  border-top-color: #1a1612;
+  border-left-color: #1a1612;
+  border-bottom-color: #6b6058;
+  border-right-color: #6b6058;
+}
+
+.thoughts-body {
+  padding: 1.5rem;
+  color: #b0a48e;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.thoughts-body p {
+  margin-bottom: 1rem;
+}
+
+.thoughts-body p:last-child {
+  margin-bottom: 0;
+}
+
 /* --- Scrollbar styling --- */
 ::-webkit-scrollbar {
   width: 6px;

@@ -1,55 +1,54 @@
 /* ============================================
-   Proto-Town — Custom Stream Switcher
+   Proto-Town — Radio Booth Stream Switcher
    ============================================
-   Polls a status endpoint to detect when a custom broadcast is live.
-   When live: swaps the default camera feed for the custom stream
+   Detects when the Proto-Town Radio Booth stream is live by polling
+   its Cloudflare Stream HLS manifest (200 = live, 204 = offline).
+   When live: swaps the default camera feed for the radio booth stream
    (unmuted, with its own audio) and hides the KLKT radio panel.
    When offline: restores the default Cloudflare Stream feed + radio. */
 
 (function () {
   'use strict';
 
-  var STATUS_URL       = 'https://stream-status.proto.town/';
-  var POLL_INTERVAL    = 15000;
-  var CF_CUSTOMER_BASE = 'https://customer-jvitd3fw0f6iv9bm.cloudflarestream.com/';
-  var DEFAULT_VIDEO_ID = '71d96000406138bcd6cced6b04863058';
-  var DEFAULT_SRC      = CF_CUSTOMER_BASE + DEFAULT_VIDEO_ID + '/iframe?muted=true&autoplay=true';
+  var CF_BASE      = 'https://customer-jvitd3fw0f6iv9bm.cloudflarestream.com/';
+  var BOOTH_ID     = 'e5e83e2f7551b57db275ef55784e1cfe';
+  var DEFAULT_ID   = '71d96000406138bcd6cced6b04863058';
+  var DEFAULT_SRC  = CF_BASE + DEFAULT_ID + '/iframe?muted=true&autoplay=true';
+  var BOOTH_SRC    = CF_BASE + BOOTH_ID + '/iframe?muted=false&autoplay=true';
+  var MANIFEST_URL = CF_BASE + BOOTH_ID + '/manifest/video.m3u8';
+  var POLL_MS      = 15000;
 
-  var iframeEl      = document.getElementById('livestream');
-  var radioPanel    = document.getElementById('radio-panel');
-  var feedLabel     = document.querySelector('.feed-label');
-  var windowTitle   = document.querySelector('.window-title');
-  var statusLabel   = document.querySelector('.status-label');
-  var streamStatus  = document.getElementById('stream-status');
-  var banner        = document.getElementById('special-broadcast-banner');
-  var isCustomLive  = false;
+  var iframeEl     = document.getElementById('livestream');
+  var radioPanel   = document.getElementById('radio-panel');
+  var feedLabel    = document.querySelector('.feed-label');
+  var windowTitle  = document.querySelector('.window-title');
+  var statusLabel  = document.querySelector('.status-label');
+  var streamStatus = document.getElementById('stream-status');
+  var banner       = document.getElementById('special-broadcast-banner');
+  var isBoothLive  = false;
+  var testOverride = false;
 
-  function buildCustomSrc(videoId) {
-    return CF_CUSTOMER_BASE + videoId + '/iframe?muted=false&autoplay=true';
-  }
+  function switchToBooth() {
+    if (isBoothLive) return;
+    isBoothLive = true;
 
-  function switchToCustomStream(videoId) {
-    if (isCustomLive) return;
-    isCustomLive = true;
-
-    iframeEl.src = buildCustomSrc(videoId);
+    iframeEl.src = BOOTH_SRC;
 
     if (window.ProtoRadio) window.ProtoRadio.pause();
     radioPanel.classList.add('stream-hidden');
 
-    if (feedLabel)   feedLabel.textContent = 'LIVE BROADCAST';
-    if (windowTitle) windowTitle.textContent = 'LIVE — PROTO-TOWN, USA';
-    if (statusLabel) statusLabel.textContent = 'SPECIAL BROADCAST';
+    if (feedLabel)   feedLabel.textContent = 'RADIO BOOTH';
+    if (windowTitle) windowTitle.textContent = 'LIVE — PROTO-TOWN RADIO';
+    if (statusLabel) statusLabel.textContent = 'RADIO BOOTH LIVE';
 
     if (streamStatus) streamStatus.classList.add('special');
     if (banner) banner.classList.add('active');
-
     document.body.classList.add('special-live');
   }
 
   function switchToDefault() {
-    if (!isCustomLive) return;
-    isCustomLive = false;
+    if (!isBoothLive) return;
+    isBoothLive = false;
 
     iframeEl.src = DEFAULT_SRC;
 
@@ -61,36 +60,33 @@
 
     if (streamStatus) streamStatus.classList.remove('special');
     if (banner) banner.classList.remove('active');
-
     document.body.classList.remove('special-live');
   }
 
-  function checkLiveStatus() {
-    fetch(STATUS_URL)
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.live && data.videoId) {
-          switchToCustomStream(data.videoId);
+  function checkLive() {
+    if (testOverride) return;
+    fetch(MANIFEST_URL, { method: 'HEAD' })
+      .then(function (r) {
+        if (r.status === 200) {
+          switchToBooth();
         } else {
           switchToDefault();
         }
       })
       .catch(function () {
-        /* On fetch error, keep current state (don't flicker) */
+        /* On network error, keep current state */
       });
   }
 
-  checkLiveStatus();
-  setInterval(checkLiveStatus, POLL_INTERVAL);
+  checkLive();
+  setInterval(checkLive, POLL_MS);
 
-  /* Expose for manual testing: ProtoStream.goLive() / ProtoStream.goDefault() */
+  /* Manual testing: goLive() / goDefault() pause polling so the
+     override isn't immediately reverted by the next check cycle. */
   window.ProtoStream = {
-    goLive: function (videoId) {
-      switchToCustomStream(videoId || 'test');
-    },
-    goDefault: function () {
-      switchToDefault();
-    },
-    isLive: function () { return isCustomLive; }
+    goLive: function () { testOverride = true; switchToBooth(); },
+    goDefault: function () { testOverride = true; switchToDefault(); },
+    resume: function () { testOverride = false; checkLive(); },
+    isLive: function () { return isBoothLive; }
   };
 })();

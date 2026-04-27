@@ -127,4 +127,10 @@
       if (audio) audio.volume = parseFloat(this.value);
     });
   }
+
+  window.ProtoRadio = {
+    pause: function () { if (isPlaying) togglePlay(); },
+    resume: function () { if (!isPlaying) togglePlay(); },
+    isPlaying: function () { return isPlaying; }
+  };
 })();

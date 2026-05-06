@@ -580,6 +580,44 @@ a:hover {
   pointer-events: none;
 }
 
+/* --- Offline Placeholder --- */
+.offline-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: url('../assets/images/offline-bg.jpg') center/cover no-repeat;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.offline-placeholder.active {
+  display: flex;
+}
+
+.offline-message {
+  color: #b0a48e;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.6rem 1.5rem;
+  background: rgba(26, 23, 20, 0.8);
+  border: 1px solid rgba(176, 164, 142, 0.15);
+  border-radius: 3px;
+}
+
+/* Offline status indicator */
+.stream-status.offline {
+  color: var(--text-muted);
+}
+
+.stream-status.offline .live-dot {
+  background: var(--text-muted);
+  animation: none;
+  box-shadow: none;
+}
+
 /* --- Mobile Responsive --- */
 @media (max-width: 640px) {
   :root {

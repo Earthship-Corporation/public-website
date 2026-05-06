@@ -30,7 +30,7 @@
       <div class="status-right">
         <span id="stream-status" class="stream-status live">
           <span class="live-dot"></span>
-          LIVE
+          <span id="stream-status-text">LIVE</span>
         </span>
         <span class="separator">|</span>
         <span id="clock" class="clock"></span>
@@ -76,6 +76,10 @@
             allowfullscreen="true"
             loading="eager"
           ></iframe>
+          <!-- Offline placeholder -->
+          <div id="offline-placeholder" class="offline-placeholder">
+            <span class="offline-message">Stream is currently offline</span>
+          </div>
           <!-- CRT overlay effects -->
           <div class="crt-overlay"></div>
           <div class="scanlines"></div>

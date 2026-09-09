@@ -40,7 +40,6 @@
     <!-- Main content: the broadcast window -->
     <main class="broadcast-container">
       <div class="hero-buttons">
-        <button id="thoughts-btn-hero" class="thoughts-btn-hero">Thoughts</button>
         <a href="https://jobs.ashbyhq.com/proto-town" target="_blank" rel="noopener" class="thoughts-btn-hero">Careers</a>
       </div>
 
@@ -119,26 +118,10 @@
 
     </main>
 
-    <!-- Thoughts Modal -->
-    <div id="thoughts-modal" class="thoughts-overlay hidden">
-      <div class="thoughts-window">
-        <div class="thoughts-title-bar">
-          <span class="thoughts-title">THOUGHTS</span>
-          <button id="thoughts-close" class="thoughts-close-btn" title="Close">&#x2715;</button>
-        </div>
-        <div class="thoughts-body">
-          <p>Over the last half-century, American imagination has been held captive by a sanitized archetype of progress. The last remnants of our frontier spirit were replaced by programmatic company formation and layers of regulations that strangled genuine innovation. Inventive pioneers solving new problems as they worked their way westward gave way to software startups searching for product-market fit.</p>
-          <p>Equally important to reindustrialization is a return to a culture of experimentation. Proto-Town hopes to offer a new place with a resurrected spirit of the frontier with the infrastructure to build quickly.</p>
-        </div>
-      </div>
-    </div>
-
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-left">
         <a href="https://www.proto.town/" target="_blank" rel="noopener">proto.town</a>
-        <span class="separator">|</span>
-        <button id="thoughts-btn" class="thoughts-btn">Thoughts</button>
         <span class="separator">|</span>
         <a href="https://jobs.ashbyhq.com/proto-town" target="_blank" rel="noopener" class="thoughts-btn">Careers</a>
       </div>
@@ -151,19 +134,5 @@
   <script src="js/effects.js"></script>
   <script src="js/radio.js"></script>
   <script src="js/stream.js"></script>
-  <script>
-    (function () {
-      var modal = document.getElementById('thoughts-modal');
-      function openModal() { modal.classList.remove('hidden'); }
-      document.getElementById('thoughts-btn').addEventListener('click', openModal);
-      document.getElementById('thoughts-btn-hero').addEventListener('click', openModal);
-      document.getElementById('thoughts-close').addEventListener('click', function () {
-        modal.classList.add('hidden');
-      });
-      modal.addEventListener('click', function (e) {
-        if (e.target === modal) modal.classList.add('hidden');
-      });
-    })();
-  </script>
 </body>
 </html>
